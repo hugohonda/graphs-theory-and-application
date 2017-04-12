@@ -4,12 +4,14 @@ class Vertice(object):
     def __init__(self, index, name):
         self.index = index
         self.name = name
-        self.adjacents = []
         self.color = 'white'
+        self.adjacents = []
+        self.predecessors = []
         self.count = 0
 
 class Graph(object):
     def __init__(self, vertices = None):
+        self.time = 0
         if vertices == None:
             self.vertices = []
         else:
@@ -23,10 +25,48 @@ class Graph(object):
 
     def print_graph(self):
         for vertice in self.vertices:
-            print('\n', vertice.index, ' ', vertice.name, '-> ', end='')
+            print('\n', vertice.index, ' ', vertice.color, ' ', vertice.name, '-> ', end='')
             if vertice.adjacents:
                 for adjacent in vertice.adjacents:
-                    print(adjacent.name, ' ',end='')
-        print('\n-------------')
+                    print(adjacent.name, ' ', end='')
+
+    def dfs(self):
+        for vertice in self.vertices:
+            if vertice.color == 'white':
+                self.dfs_visit(vertice)
+    
+    def dfs_visit(self, vertice):
+        vertice.color = 'gray'
+        self.time = self.time + 1
+        for adjacent in vertice.adjacents:
+            v = adjacent
+            if v.color == 'white':
+                v.predecessors.append(vertice)
+                self.dfs_visit(v)
+        vertice.color = 'black'
+        final_time = self.time + 1
+        vertice.time = final_time
+        self.time = final_time
+        print('Resposta: ', final_time)
+
+    def gen_matrix(self):
+        dimension = len(self.vertices)
+        matrix = [[0 for x in range(dimension)] for y in range(dimension)]
+        for x in range(dimension):
+            for y in range(dimension):
+                matrix[x][y] = 0
+                for adjacent in self.vertices[x].adjacents:
+                    if adjacent.index == y:
+                        matrix[x][y] = 1
+        return matrix
+    
+    def print_matrix(self, matrix):
+        dimension = len(self.vertices)
+        for x in range(dimension):
+            print('\n', end='')
+            for y in range(dimension):
+                print(matrix[x][y],' ', end='')
+
+
     
 

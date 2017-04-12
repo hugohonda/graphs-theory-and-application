@@ -20,6 +20,13 @@ my_graph.set_adjacence(5, 6)
 my_graph.set_adjacence(6, 5)
 my_graph.set_adjacence(6, 7)
 my_graph.set_adjacence(7, 7)
+
+print('-----------------------', end='')
 my_graph.print_graph()
-
-
+print('\n-----------------------',  end='')
+matrix = my_graph.gen_matrix()
+my_graph.print_matrix(matrix)
+print('\n-----------------------')
+my_graph.dfs()
+my_graph.print_graph()
+print('\n-----------------------')
