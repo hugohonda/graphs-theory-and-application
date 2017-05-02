@@ -10,13 +10,13 @@ class Vertice(object):
         self.count = 0
 
 class Graph(object):
-    def __init__(self, vertices = None):
+    def __init__(self, names = None):
         self.time = 0
-        if vertices == None:
-            self.vertices = []
-        else:
-            self.vertices = vertices
-    
+        self.vertices = []
+        if names != None:
+            for index,name in enumerate(names):
+                self.append_vertice(Vertice(index,name))
+
     def append_vertice(self, vertice):
         self.vertices.append(vertice)
 

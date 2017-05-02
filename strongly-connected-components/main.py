@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from graph import *
 
-my_graph = Graph()
 names = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-for index,name in enumerate(names):
-    my_graph.append_vertice(Vertice(index,name))
+
+my_graph = Graph(names)
 
 my_graph.set_adjacence(0, 1)
 my_graph.set_adjacence(1, 2)
